@@ -1,124 +1,104 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/r-a-j/IDS-Image-Classification/refs/heads/main/assets/company-logo.png" alt="PartikelArt Logo" align="left" height="80px" width="204px">
-  <img src="https://raw.githubusercontent.com/r-a-j/IDS-Image-Classification/refs/heads/main/assets/uni-logo.svg" alt="TU Dortmund Logo" align="right" height="45px" width="250px">
-</p>
-<br>
-<br>
-<br>
+# Metal & Non-Metal Particle Classification and Segmentation
 
-<h1 align="center">Industrial Data Science 2</h1>
-<br>
-<h3 align="center">Metal and Non-Metal Particle Classification and Segmentation</h3>
-
-### Project Overview
-
-This project focuses on developing deep learning models to classify and segment metal and non-metal particles using high-resolution microscope images and low-resolution mobile phone images. The models include YOLOv8 for object detection and a custom CNN for classification. The goal is to create a solution that can adapt to varying image qualities, ensuring it is suitable for a wide range of industrial scenarios, ultimately enhancing cleanliness inspections and reducing contamination risks.
-
-YOLOv8 was selected for its flexibility, offering models from nano to extra-large sizes, enabling deployment on both mobile devices and powerful servers.
-
-## Plan
-
-### Step 1: Data Preprocessing
-
-- **Data Collection**: 
-  - The dataset comprises 19,206 metal and 34,674 non-metal high-resolution microscope images, and 288 metal and 372 non-metal low-resolution mobile phone images. This diverse dataset was provided by PartikelART Solutions GmbH, a company specializing in technical cleanliness solutions.
-
-- **Data Preprocessing**: 
-  - The CNN images were resized to 128x128 pixels, converted to grayscale, and normalized to a [0, 1] pixel value range. Data augmentation techniques were applied to enhance generalization.
-  - For YOLOv8, images were resized to 640x640 pixels, and 500 images were manually labeled with bounding boxes using the makesense.ai tool.
-
-### Step 2: Object Detection
-
-- **Model Selection**: 
-  - YOLOv8 was selected for object detection due to its range of model sizes (nano to extra-large) suitable for various deployment environments.
-
-- **Model Fine-tuning**: 
-  - YOLOv8 was fine-tuned on the labeled dataset, split into 70% training, 15% validation, and 15% testing.
-
-### Step 3: Object Classification
-
-- **Model Selection**: 
-  - A custom Convolutional Neural Network (CNN) was designed for classifying metal and non-metal particles.
-
-- **Model Training**: 
-  - The CNN was trained over 100 epochs with a batch size of 32, using early stopping and learning rate reduction to optimize performance and prevent overfitting.
-
-### Step 4: Deployment
-
-- **Interface Setup**: 
-  - A user interface was set up using Gradio, allowing users to upload images and view the results of object detection and classification.
-
-- **Deployment**: 
-  - The YOLOv8 models can be deployed on mobile devices or servers, depending on the model size. The CNN model is suitable for server deployment in high-performance environments.
-
-### User Interaction
-
-Users upload an image containing objects to the interface. The image is passed through the object detection model, which identifies and locates objects within the image. Detected objects are then classified as metal or non-metal, with results displayed on the original image.
-
-### Further Considerations
-
-- **Performance Evaluation**: 
-  - The models are evaluated using metrics such as accuracy, precision, recall, mean Average Precision (mAP), and Intersection over Union (IoU).
-
-- **Continuous Improvement**: 
-  - The system’s performance is continuously monitored, and user feedback is collected for further improvements.
-
-## Analytical Strategy
-
-The analytical strategy was carefully designed to address the variability in image quality and class imbalance. The YOLOv8 model was evaluated using mAP and IoU metrics, while the CNN was trained with data augmentation to improve generalization. The combined use of these models ensures robust particle classification and segmentation across different scenarios.
-
-## Results
-
-The project successfully developed models for metal and non-metal particle classification with the following results:
-
-| Model                           | Data Source             | Acc. (Train) | Acc. (Val) | Loss (Train) | Loss (Val) |
-|---------------------------------|-------------------------|--------------|------------|--------------|------------|
-| YOLOv8n (Obj. Detection)        | Microscope (High Res)   | 75%          | 75%        | 2.10         | 3.32       |
-| YOLOv8n (Inst. Segmentation)    | Microscope (High Res)   | 71%          | 71%        | 0.57         | 1.61       |
-| YOLOv8n (Obj. Detection)        | Mobile Phone (Low Res)  | 66%          | 66%        | 0.47         | 1.41       |
-| CNN                             | Microscope (High Res)   | 97%          | 97%        | 0.10         | 0.20       |
-| CNN                             | Mobile Phone (Low Res)  | 93%          | 88%        | 0.17         | 0.30       |
-
-- **Microscope Image Results (CNN)**
-  
-</br>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/r-a-j/IDS-Image-Classification/main/results/CNN%20microscope%20results/Precision_Recall_Curve_Microscope_HD.png" alt="Precision_Recall_Curve_Microscope Image" align="center" >
-</p>
-</br>
-
-- **Microscope Image Results (YOLOv8)**
-  
-- **Mobile Image Results (YOLOv8 and CNN)**
-
-## Conclusion
-
-This project demonstrated the effectiveness of YOLOv8 and CNN models in classifying and segmenting metal and non-metal particles across varying image resolutions. While the CNN achieved higher accuracy, YOLOv8 offered flexibility in deployment, making it suitable for different industrial environments. Future work will focus on developing a unified model using transfer learning to handle both high and low-resolution images, providing a single, versatile solution for industrial applications.
-
-## Future Work
-
-The next phase involves creating a single model using transfer learning, combining the strengths of both the existing CNN models trained on high-resolution and low-resolution images. This unified model will be capable of handling diverse image sources, enabling broader deployment across different industrial settings.
-
-## How to Use
-
-1. **Installation:**
-   - Clone the repository.
-   - Install the required dependencies using `pip install -r requirements.txt`.
-
-2. **Training:**
-   - For YOLOv8: Use the provided training script with the labeled dataset.
-   - For CNN: Run the training script with the preprocessed images.
-
-3. **Evaluation:**
-   - Evaluate the trained models using the test set and analyze the performance metrics.
-
-4. **Deployment:**
-   - Deploy the YOLOv8 models on mobile devices or servers.
-   - Deploy the CNN model on a high-performance server.
-
-## References
-
-- **Ultralytics YOLOv8:** Glenn Jocher, Ayush Chaurasia, Jing Qiu. "Ultralytics YOLO." (2023). Available at: [Ultralytics YOLO](https://ultralytics.com)
-- **PartikelART Solutions GmbH:** Technical Cleanliness Solutions. Available at: [PartikelART](https://www.partikel-art.de/)
+**Course:** Industrial Data Science 2 (M.Sc. Data Science, TU Dortmund University, Apr–Aug 2024)  
+**Industry Partner:** [PartikelART Solution GmbH](https://www.partikel-art.de/) (TU Dortmund / IPS spin-off)  
+**Team (Group 3):** Raj Anilbhai Pawar, Harsh Yadav, Ananya Pal, Saptarsi Bhattacharya, Purvanshi Sharma
 
 ---
+
+## Overview
+
+In automotive, battery, and electronics manufacturing, microscopic metallic chips and non-metallic contaminants left on components can cause short circuits or premature wear. Standard technical cleanliness inspection depends on lab microscopes and slow manual review.
+
+Partnering with **PartikelART Solution GmbH**, our 5-student team built and benchmarked deep learning models for classifying and segmenting metallic (`met`) vs. non-metallic (`nichtmet`) particles across two very different image domains:
+- **53,880** high-resolution microscope crops (**19,206** metal, **34,674** non-metal)
+- **660** low-resolution smartphone captures (**288** metal, **372** non-metal)
+- **1,024** manually annotated images (`640×640`) labeled with bounding boxes and masks in `makesense.ai` (70% train / 15% val / 15% test) for detection and segmentation
+
+> **From classroom PoC to production:** During the final presentation of this project, PartikelART co-founder Dr.-Ing. Ronny Zwinkau sat in the audience. Based on these results and the next-step proposals presented, I joined PartikelART in October 2024 as a Machine Learning & Software Engineer, where we scaled particle inspection under VDA 19.1 / ISO 16232 and won **1st Place at the TU Start-up Award 2025**. (Production company code and datasets are proprietary and not part of this university repository.)
+
+---
+
+## My Contributions
+
+Within Group 3, my primary work covered:
+- **Custom Keras U-Net Segmentation (`train/unet/`):** Built the YOLO-bounding-box-to-mask conversion pipeline (`yolo-annotations-to-mask.ipynb`) and iterated through five `640×640` U-Net training variants (`Raj-U-Net*.ipynb`) with L2 regularization, synchronized image/mask augmentation, `ReduceLROnPlateau`, and `EarlyStopping`.
+- **Mobile Classifier & TFLite Export (`train/cnn/cnn_detect_mobile.ipynb`):** Built the two-stage frozen/fine-tuned MobileNetV2 transfer-learning pipeline for low-resolution mobile images and exported/validated `.tflite` inference.
+- **Interactive Gradio Prototype (`app.py`, `src/`):** Built the 3-tab Gradio interface combining YOLOv8 detection, OpenCV contour + CNN classification (`src/ClassifyCnn.py`), and a 17-transform augmentation utility (`src/ImageProcessor.py`).
+- **Evaluation Report:** Authored the individual technical evaluation report comparing architectures across microscope and mobile image domains.
+
+---
+
+## Benchmark Results
+
+| Model | Data Source | Train Acc | Val Acc / mAP@0.5 | Val Loss |
+| :--- | :--- | :---: | :---: | :---: |
+| **Custom CNN (128×128 Grayscale)** | Microscope (53,880 crops) | **97%** | **97% (AP 0.97 / 1.00)** | **0.20** |
+| MobileNetV2 (Two-Stage Fine-Tune) | Mobile Phone (660 images) | 93% | 88% | 0.30 |
+| YOLOv8n (Object Detection) | Microscope (100 epochs) | 75% | 75% · 0.756 mAP@0.5 | 3.32 |
+| YOLOv8n (Instance Segmentation) | Microscope (100 epochs) | 71% | 71% · 0.717 Mask mAP | 1.61 |
+| YOLOv8n (Object Detection) | Mobile Phone (200 epochs) | 66%* | 0.820 mAP@0.5 (peak ep. 144) | 1.41 |
+| Custom U-Net (Box-Derived Masks) | Mobile Phone (50 epochs) | 49–55% | 32–92% (unstable) | 0.28 |
+
+*\*Mobile YOLOv8n peaked at `0.825 mAP@0.5` around epoch 144 before overfitting by epoch 200 (`0.665 mAP@0.5`), highlighting the 660-image data bottleneck.*
+
+---
+
+## Visual Outputs & Diagnostics
+
+### Microscope Instance Segmentation (YOLOv8n-Seg)
+![YOLOv8n Instance Segmentation on Microscope Images](https://raw.githubusercontent.com/r-a-j/Particle-Classification-and-Segmentation/main/results/Yolo%20microscope%20train%20segment/train3/val_batch0_pred.jpg)
+
+### Mobile Phone Detections (YOLOv8n)
+![YOLOv8n Validation Predictions on Mobile Phone Images](https://raw.githubusercontent.com/r-a-j/Particle-Classification-and-Segmentation/main/results/Yolo%20mobile%20train/train11-yolov8n-200epocs-mobile/val_batch2_pred.jpg)
+
+### Microscope Bounding-Box Detection (YOLOv8n)
+![YOLOv8n Object Detection on Microscope Images](https://raw.githubusercontent.com/r-a-j/Particle-Classification-and-Segmentation/main/results/Yolo%20microscope%20train%20detect/results%20yolo%20v8%20high%20res/val_batch2_pred.jpg)
+
+### Precision-Recall Curves (Custom CNN Microscope & YOLOv8n Mobile)
+| Custom CNN (Microscope, AP 0.97 / 1.00) | YOLOv8n (Mobile, 0.820 mAP@0.5) |
+| :---: | :---: |
+| ![CNN Precision-Recall Curve](https://raw.githubusercontent.com/r-a-j/Particle-Classification-and-Segmentation/main/results/CNN%20microscope%20results/Precision_Recall_Curve_Microscope_HD.png) | ![YOLOv8n Mobile Precision-Recall Curve](https://raw.githubusercontent.com/r-a-j/Particle-Classification-and-Segmentation/main/results/Yolo%20mobile%20train/train11-yolov8n-200epocs-mobile/Precision_Recall_Curve_for_YOLOv8_on_Mobile_Images.png) |
+
+### U-Net Training Diagnostics
+![U-Net Training and Validation Loss and Accuracy](https://raw.githubusercontent.com/r-a-j/Particle-Classification-and-Segmentation/main/results/U-net/training_validation_loss_accuracy.png)
+
+---
+
+## Key Takeaways
+
+1. **Crop classification vs. full-frame detection:** The custom 3-block CNN reached 97% accuracy on pre-cropped microscope particles, while YOLOv8n sat at 0.756 mAP@0.5 because textured filter backgrounds add localization noise.
+2. **Mask supervision quality matters most:** Training U-Net on masks approximated from rectangular YOLO bounding boxes produced 32%–92% validation accuracy swings despite smooth loss convergence. True polygon/pixel masks are required for reliable particle boundaries.
+3. **Small-dataset overfitting:** On 660 mobile phone images, YOLOv8n peaked at epoch 144 (`0.825 mAP@0.5`) and degraded by epoch 200 (`0.665 mAP@0.5`), showing why early checkpointing and larger active-learning datasets are necessary before deployment.
+
+---
+
+## Repository Structure
+
+```text
+.
+├── app.py                        # 3-tab Gradio UI (YOLO detect, CNN classify, augmentation)
+├── src/
+│   ├── ClassifyCnn.py            # OpenCV contour detection + Keras CNN classifier
+│   ├── ImageProcessor.py         # Batch resizing and 17-transform augmentation utilities
+│   └── ClusteringAlgorithm.py    # Unsupervised K-Means exploration helper
+├── train/
+│   ├── cnn/                      # Microscope CNN & MobileNetV2 + TFLite export notebooks
+│   ├── unet/                     # YOLO-to-mask conversion and 5 custom Keras U-Net runs
+│   ├── yolo/                     # YOLOv8 / YOLOv9 training and evaluation notebooks
+│   └── explore-other-architectures/
+├── results/                      # Validation batches, PR/F1 curves, CSV training logs
+├── docs/Presentations/           # Final & milestone presentation decks (PDF & PPTX)
+└── requirements.txt
+```
+
+## Running the Gradio Prototype
+
+```bash
+git clone https://github.com/r-a-j/Particle-Classification-and-Segmentation.git
+cd Particle-Classification-and-Segmentation
+pip install -r requirements.txt
+python app.py
+```
+
+*Note: Raw industrial particle datasets remain confidential to PartikelART Solution GmbH and are excluded from this repository. Sample validation batches, logs, notebooks, and [presentation decks](docs/Presentations/IDS_2_Group3_Presentation_3.pdf) are included for full reproducibility of the methodology.*
